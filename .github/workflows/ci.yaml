@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  push:
+    branches: [ main ]
+
+permissions: write-all
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - uses: cycjimmy/semantic-release-action@v4
+        name: semantic release
+        id: semantic
+        env:
+          GITHUB_TOKEN: "${{ secrets.APP_GH_TOKEN }}"
+      - name: write job summary
+        run: |
+          echo "__release-version__: ${{ steps.semantic.outputs.new_release_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "__release-tag__: ${{ steps.semantic.outputs.new_release_git_tag }}" >> $GITHUB_STEP_SUMMARY

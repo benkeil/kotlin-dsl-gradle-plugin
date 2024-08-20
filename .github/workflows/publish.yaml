@@ -1,0 +1,42 @@
+name: 'publish'
+
+on:
+  push:
+    tags: [ 'v*' ]
+  workflow_dispatch:
+
+run-name: ${{ github.ref_name }}
+
+permissions:
+  id-token: 'write'
+  contents: 'write'
+  packages: 'write'
+  pull-requests: 'write'
+  issues: 'read'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.provide-version.outputs.release_version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node for semantic-release
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: corretto
+          cache: gradle
+
+      - name: publish
+        run: ./gradlew publishPlugins
+        env:
+          GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
+          GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+
