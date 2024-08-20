@@ -6,6 +6,8 @@ plugins {
   id("me.qoomon.git-versioning") version "6.4.4"
 }
 
+group = "io.github.benkeil"
+
 apply { plugin("me.qoomon.git-versioning") }
 
 gradlePlugin {
@@ -13,7 +15,7 @@ gradlePlugin {
   vcsUrl = "https://github.com/benkeil/kotlin-dsl-gradle-plugin.git"
   plugins {
     create("kotlinDsl") {
-      id = "io.github.benkei.kotlin-dsl-gradle-plugin"
+      id = "io.github.benkeil.kotlin-dsl-gradle-plugin"
       displayName = "Kotlin DSL Gradle Plugin"
       description =
           "Generates special kotlin classes from different API schemas, that can be used to build a custom DSL"
@@ -25,7 +27,7 @@ gradlePlugin {
 
 gitVersioning.apply {
   refs {
-    considerTagsOnBranches = System.getenv()["CI"]?.toBoolean() ?: false
+    considerTagsOnBranches = System.getenv()["CI"]?.toBoolean() ?: true
     tag("v(?<version>.+)") { version = "\${ref.version}" }
     branch(".+") { version = "\${ref}" }
   }
