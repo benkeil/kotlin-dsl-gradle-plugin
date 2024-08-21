@@ -25,7 +25,7 @@ class KotlinDslGradlePluginFunctionalTest :
             """
             plugins {
                 kotlin("jvm") version "2.0.10"
-                id("io.github.benkei.kotlin-dsl-gradle-plugin")
+                id("io.github.benkeil.kotlin-dsl-gradle-plugin")
             }
             
             kotlinDsl {

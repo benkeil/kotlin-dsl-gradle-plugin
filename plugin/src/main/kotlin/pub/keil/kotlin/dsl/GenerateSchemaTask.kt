@@ -27,22 +27,22 @@ constructor(
     val converter =
         Class.forName(config.converter).getDeclaredConstructor().newInstance() as Converter
     config.jsonSchemas.forEach { schema ->
-      println("Generating JsonSchema classes for ${schema.path}")
+      logger.debug("Generating JsonSchema classes for ${schema.path}")
       JsonSchemaReader(aliases = schema.aliases, propertiesToSkip = schema.propertiesToSkip)
           .read(schema.canonicalName, schema.path)
           .map(converter::convert)
           .forEach { it.writeTo(config.outputDirectory) }
-      println("Classes generated at ${config.outputDirectory}")
+      logger.info("Classes generated at ${config.outputDirectory}")
     }
 
     config.openApiSchemas.forEach { schema ->
-      println("Generating OpenAPI classes for ${schema.path}")
+      logger.debug("Generating OpenAPI classes for ${schema.path}")
       val jsonSchemaReader =
           JsonSchemaReader(aliases = schema.aliases, propertiesToSkip = schema.propertiesToSkip)
       OpenApiReader(jsonSchemaReader).read(schema.path).map(converter::convert).forEach {
         it.writeTo(config.outputDirectory)
       }
-      println("Classes generated at ${config.outputDirectory}")
+      logger.info("Classes generated at ${config.outputDirectory}")
     }
   }
 
@@ -58,10 +58,8 @@ constructor(
 
       val config = pluginExtension.build()
       val sourceSets = project.properties["sourceSets"] as SourceSetContainer
-      sourceSets.named("main") {
-        java.srcDirs(config.outputDirectory)
-        println("added ${config.outputDirectory} to sourceSets")
-      }
+      sourceSets.named("main") { java.srcDirs(config.outputDirectory) }
+      project.logger.info("added ${config.outputDirectory} to sourceSets")
     }
   }
 }

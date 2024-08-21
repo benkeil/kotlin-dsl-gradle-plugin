@@ -1,5 +1,6 @@
 package pub.keil.kotlin.dsl.reader
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -18,14 +19,18 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.Path
-import pub.keil.kotlin.dsl.converter.AllOptionalConverter
+import pub.keil.kotlin.dsl.converter.Flavor
+import pub.keil.kotlin.dsl.converter.create
 import pub.keil.kotlin.dsl.extension.capitalize
 import pub.keil.kotlin.dsl.model.DslClass
 import pub.keil.kotlin.dsl.model.DslProperty
 import pub.keil.kotlin.dsl.utils.getResourceAsPath
 
 private val logger = KotlinLogging.logger {}
-private val mapper = jacksonObjectMapper().registerModules(JavaTimeModule())
+private val mapper =
+    jacksonObjectMapper()
+        .registerModules(JavaTimeModule())
+        .setSerializationInclusion(JsonInclude.Include.NON_NULL)
 private val debugMapper = mapper.writerWithDefaultPrettyPrinter()
 
 class JsonSchemaReader(
@@ -146,9 +151,9 @@ class JsonSchemaReader(
 }
 
 fun main() {
-  val converter = AllOptionalConverter()
+  val converter = Flavor.DEFAULT.create()
   JsonSchemaReader()
       .read("de.otto.pdh.da.aws.ecs.TaskDefinition", getResourceAsPath("task-definition.json"))
       .map(converter::convert)
-      .forEach { it.writeTo(Path("lib/build/generated/sources/dsl")) }
+      .forEach { it.writeTo(Path("lib/build/generated/sources/kotlin-dsl")) }
 }

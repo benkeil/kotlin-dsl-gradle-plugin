@@ -5,16 +5,10 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.LambdaTypeName
-import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.UNIT
 import pub.keil.kotlin.dsl.model.DslClass
-import pub.keil.kotlin.dsl.model.DslProperty
-
-interface Converter {
-  fun convert(dslClass: DslClass): FileSpec
-}
 
 class AllOptionalConverter : Converter {
   override fun convert(dslClass: DslClass): FileSpec {
@@ -50,12 +44,5 @@ class AllOptionalConverter : Converter {
                 .addStatement("return %T().apply(block)", self)
                 .build())
         .build()
-  }
-
-  private fun toPropertySpec(property: DslProperty): PropertySpec {
-    val type = property.type.copy(nullable = true)
-    val builder = PropertySpec.builder(property.name, type).initializer("null").mutable()
-    property.description?.let { description -> builder.addKdoc(escapeDoc(description)) }
-    return builder.build()
   }
 }
