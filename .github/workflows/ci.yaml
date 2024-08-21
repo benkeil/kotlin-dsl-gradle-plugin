@@ -7,8 +7,23 @@ on:
 permissions: write-all
 
 jobs:
-  ci:
+  check:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: corretto
+          cache: gradle
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew check
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [ check ]
     steps:
       - uses: actions/checkout@v4
         with:
