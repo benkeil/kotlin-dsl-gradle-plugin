@@ -1,4 +1,4 @@
-package pub.keil.kotlin.dsl
+package pub.keil.kotlin.dsl.plugin
 
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
@@ -19,8 +19,8 @@ class KotlinDslGradlePluginFunctionalTest :
 
       test("can run task") {
         settingsFile.writeText("")
-        jsonSchema.writeText(getResource("task-definition.json"))
-        openApiSchema.writeText(getResource("kubernetes.json"))
+        jsonSchema.writeText(pub.keil.kotlin.dsl.plugin.getResource("task-definition.json"))
+        openApiSchema.writeText(pub.keil.kotlin.dsl.plugin.getResource("kubernetes.json"))
         buildFile.writeText(
             """
             plugins {

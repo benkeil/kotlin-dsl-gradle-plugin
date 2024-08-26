@@ -1,4 +1,4 @@
-package pub.keil.kotlin.dsl
+package pub.keil.kotlin.dsl.plugin
 
 import org.gradle.api.Project
 

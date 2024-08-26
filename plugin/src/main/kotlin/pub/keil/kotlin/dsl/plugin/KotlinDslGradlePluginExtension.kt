@@ -1,4 +1,4 @@
-package pub.keil.kotlin.dsl
+package pub.keil.kotlin.dsl.plugin
 
 import java.io.File
 import java.nio.file.Path
