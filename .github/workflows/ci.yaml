@@ -39,7 +39,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-      - run: java --version
       - uses: cycjimmy/semantic-release-action@v4
         name: semantic release
         id: semantic
