@@ -1,3 +1,5 @@
+group = "io.github.benkeil"
+
 plugins {
   `java-gradle-plugin`
   `kotlin-dsl`
@@ -5,8 +7,6 @@ plugins {
   id("com.gradle.plugin-publish") version "1.2.1"
   id("me.qoomon.git-versioning") version "6.4.4"
 }
-
-group = "io.github.benkeil"
 
 apply { plugin("me.qoomon.git-versioning") }
 
@@ -38,7 +38,7 @@ tasks.withType<Test>().configureEach { useJUnitPlatform() }
 dependencies {
   api(gradleApi())
   api(gradleKotlinDsl())
-  implementation(project(":lib"))
+  api(project(":lib"))
   implementation(gradleKotlinDsl())
   implementation(libs.bundles.implementation)
   testImplementation(libs.bundles.testImplementation)
