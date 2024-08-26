@@ -2,6 +2,8 @@ import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.implementation
 import org.gradle.kotlin.dsl.testImplementation
 
+group = "io.github.benkeil"
+
 apply { plugin("me.qoomon.git-versioning") }
 
 plugins {
