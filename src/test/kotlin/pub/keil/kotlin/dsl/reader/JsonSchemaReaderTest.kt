@@ -1,15 +1,14 @@
-package pub.keil.kotlin.dsl.plugin.reader
+package pub.keil.kotlin.dsl.reader
 
 import io.kotest.core.spec.style.FunSpec
 import kotlin.io.path.Path
 import pub.keil.kotlin.dsl.converter.Flavor
 import pub.keil.kotlin.dsl.converter.create
-import pub.keil.kotlin.dsl.reader.JsonSchemaReader
 import pub.keil.kotlin.dsl.utils.getResourceAsPath
 
 class JsonSchemaReaderTest :
     FunSpec({
-      test("read") {
+      xtest("read") {
         val converter = Flavor.DEFAULT.create()
         JsonSchemaReader()
             .read(

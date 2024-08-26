@@ -19,8 +19,8 @@ class KotlinDslGradlePluginFunctionalTest :
 
       test("can run task") {
         settingsFile.writeText("")
-        jsonSchema.writeText(pub.keil.kotlin.dsl.plugin.getResource("task-definition.json"))
-        openApiSchema.writeText(pub.keil.kotlin.dsl.plugin.getResource("kubernetes.json"))
+        jsonSchema.writeText(getResource("task-definition.json"))
+        openApiSchema.writeText(getResource("kubernetes.json"))
         buildFile.writeText(
             """
             plugins {
