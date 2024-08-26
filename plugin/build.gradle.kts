@@ -31,7 +31,10 @@ tasks.withType<Test>().configureEach { useJUnitPlatform() }
 dependencies {
   api(gradleApi())
   api(gradleKotlinDsl())
-  if (System.getenv()["CI"]?.toBoolean() == true) {
+  if (System.getenv()["CI"]?.toBoolean() == true && rootProject.version.toString()[0].isDigit()) {
+    println("Using GitHubPackages")
+    println(System.getenv("CI"))
+    println("rootProject.version: ${rootProject.version}")
     implementation("io.github.benkeil.kotlin-dsl-gradle-plugin:${rootProject.version}")
   } else {
     api(project(":lib"))
