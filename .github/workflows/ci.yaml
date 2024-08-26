@@ -34,6 +34,9 @@ jobs:
       - uses: cycjimmy/semantic-release-action@v4
         name: semantic release
         id: semantic
+        with:
+          extra_plugins: |
+            @semantic-release/exec
         env:
           GITHUB_TOKEN: "${{ secrets.APP_GH_TOKEN }}"
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
