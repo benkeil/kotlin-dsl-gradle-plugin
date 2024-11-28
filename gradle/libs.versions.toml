@@ -3,7 +3,7 @@
 
 [libraries]
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version = "2.18.1" }
-jackson-dataformat-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version = "2.18.1" }
+jackson-dataformat-yaml = { module = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml", version = "2.18.2" }
 jackson-datatype-jsr310 = { module = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310", version = "2.18.1" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version = "5.9.1" }
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version = "5.9.1" }
