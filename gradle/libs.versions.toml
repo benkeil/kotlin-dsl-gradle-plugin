@@ -9,7 +9,7 @@ kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version = "5
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version = "5.9.1" }
 kotlinpoet-jvm = { module = "com.squareup:kotlinpoet-jvm", version = "2.1.0" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.5.18" }
-kotlin-logging-jvm = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.5" }
+kotlin-logging-jvm = { module = "io.github.oshai:kotlin-logging-jvm", version = "7.0.6" }
 #dagger-java-sdk = { module = "io.dagger:dagger-java-sdk", version = "1.0.0-SNAPSHOT" }
 
 [bundles]
